@@ -2,22 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Snake Game</title>
+    <title>Snake.io 2022</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="">
 </head>
 <body>
-<h1>Snake.io 2021</h1>
+<h1>Snake.io 2022</h1>
 <canvas id="myCanvas" width="600" height="400"></canvas>
 
 <audio id="music">
-    <source src="sound/music.mp3" type="audio/mpeg">
+<!--    <source src="sound/music.mp3" type="audio/mpeg">-->
 </audio>
 <audio id="sound-eat-food">
-    <source src="sound/eat.mp3" type="audio/mpeg">
+<!--    <source src="sound/eat.mp3" type="audio/mpeg">-->
 </audio>
 <audio id="sound-game-over">
-    <source src="sound/gameover.mp3" type="audio/mpeg">
+<!--    <source src="sound/gameover.mp3" type="audio/mpeg">-->
 </audio>
 
 <div class="modal" id="modal">
@@ -34,7 +34,7 @@
 
         <div>
             <label for="user-start">
-                <input id="user-start" type="text" placeholder="Nhập user name"
+                <input id="user-start" type="text" placeholder="Nhập user name"  required
                        onchange="inputUser()">
             </label>
         </div>
@@ -50,16 +50,17 @@
 
             <div class="btn-game">
                 <button id="btn-play-again" class="btn-play-again" onclick="gamePlayAgain()">PLAY AGAIN</button>
-                <button id="btn-high-score" class="btn-high-score" onclick="highScore()">HIGH SCORE</button>
+                <button id="btn-high-score" class="btn-high-score" onclick="highScore()">HISTORY</button>
             </div>
         </div>
 
         <!--HIGH SCORE-->
         <div class="high-score" id="high-score">
             <div class="tab-high-score">
-                <p id="tab"><b>High Score</b></p>
+                <p id="tab"><b>History</b></p>
+                <span id="score-user"></span>
             </div>
-            <div>
+            <div class="tab-content">
                 <button id="btn-back" class="btn-back" onclick="btnBack()">BACK</button>
             </div>
         </div>
@@ -68,11 +69,21 @@
 
 <script>
     window.addEventListener('click', playMusic);
-
     function playMusic() {
         document.getElementById('music').play();
         window.removeEventListener('click', playMusic);
     }
+
+    const snake = document.querySelector('#img-start');
+    snake.onmouseover = () => {
+        snake.style.width = '120px'
+    }
+    snake.onmouseleave = () => {
+        snake.style.width = '100px'
+    }
+    setTimeout(() => {
+        snake.style.width = '-10px'
+    },1000)
 </script>
 </body>
 <script src="snake.js"></script>

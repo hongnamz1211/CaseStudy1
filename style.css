@@ -149,9 +149,24 @@ p {
     color: #260206;
 }
 
+.high-score{
+    height: 250px;
+}
+
+.tab-high-score {
+    height: 80%;
+    margin-left: 150px;
+    color: #260206;
+}
+
+.tab-content{
+    height: 20%;
+}
+
 .btn-back {
-    margin-top: 140px;
-    margin-left: 300px;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
     padding: 8px 16px;
     color: #260206;
     background-color: #99c8d3;

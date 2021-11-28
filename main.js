@@ -9,17 +9,6 @@ let soundGameOver = document.getElementById('sound-game-over')
 let mySnake = new Snake(-20, 320);
 let myFood = new Food(120, 120);
 
-function gamePause() {
-    clearCanvas();
-    drawScore();
-    inputUser();
-    mySnake.drawTail();
-    mySnake.eatFood();
-    mySnake.autoMove(gameOver());
-    myFood.styleFood();
-    mySnake.drawSnake();
-}
-
 function showModalUserName() {
     // document.getElementById('modal').style.display = 'block'
     document.getElementById('game-start').style.display = 'block'
@@ -40,6 +29,41 @@ function hideModalUserName() {
     gameStart()
 }
 
+function gamePause() {
+    clearCanvas();
+    drawScore();
+    inputUser();
+    mySnake.drawTail();
+    mySnake.eatFood();
+    mySnake.autoMove(gameOver());
+    myFood.styleFood();
+    mySnake.drawSnake();
+}
+
+let status
+function gameStart() {
+    status = gameOver()
+    if (status) {
+        document.getElementById('modal').style.display = 'block'
+        document.getElementById('user-start').style.display = 'none'
+        document.getElementById('game-over').style.display = 'block'
+        document.getElementById('high-score').style.display = 'none'
+        soundGameOver.play()
+
+        localStorage.setItem("Score" + (localStorage.length),(localStorage.length + 1) + " - " + userName+ " : " +score)
+        return
+    }
+    clearCanvas();
+    drawScore();
+    inputUser();
+    mySnake.drawTail();
+    mySnake.eatFood();
+    mySnake.autoMove(gameOver());
+    myFood.styleFood();
+    mySnake.drawSnake();
+    setTimeout(gameStart, 1000 / speedGame);
+}
+
 function gamePlayAgain() {
     mySnake.setXY(-20, 320)
     clearCanvas();
@@ -58,28 +82,25 @@ function gamePlayAgain() {
     setTimeout(gameStart, 1000 / speedGame);
 }
 
-let status
-function gameStart() {
-    status = gameOver()
-    if (status) {
-        document.getElementById('modal').style.display = 'block'
-        document.getElementById('user-start').style.display = 'none'
-        document.getElementById('game-over').style.display = 'block'
-        document.getElementById('high-score').style.display = 'none'
-        soundGameOver.play()
-        return
+function gameOver() {
+    for (let i = 1; i < mySnake.tail.length - 1; i++) {
+        console.log('i = ' + i);
+        if (mySnake.tail[i].x === mySnake.x && mySnake.tail[i].y === mySnake.y) {
+            return true;
+        }
+        if (mySnake.x < 0) {
+            return true
+        } else if (mySnake.x > canvas.width - 20) {
+            return true
+        } else if (mySnake.y < 0) {
+            return true
+        } else if (mySnake.y > canvas.height - 20) {
+            return true
+        }
     }
-
-    clearCanvas();
-    drawScore();
-    inputUser();
-    mySnake.drawTail();
-    mySnake.eatFood();
-    mySnake.autoMove(gameOver());
-    myFood.styleFood();
-    mySnake.drawSnake();
-    setTimeout(gameStart, 1000 / speedGame);
+    return false;
 }
+
 
 function clearCanvas() {
     // Bao khung border
@@ -109,26 +130,6 @@ function drawScore() {
     if (score > 15) {
         return speedGame = 20;
     }
-    localStorage.setItem("User" + localStorage.length, score)
-}
-
-function gameOver() {
-    for (let i = 1; i < mySnake.tail.length - 1; i++) {
-        console.log('i = ' + i);
-        if (mySnake.tail[i].x === mySnake.x && mySnake.tail[i].y === mySnake.y) {
-            return true;
-        }
-        if (mySnake.x < 0) {
-            return true
-        } else if (mySnake.x > canvas.width - 20) {
-            return true
-        } else if (mySnake.y < 0) {
-            return true
-        } else if (mySnake.y > canvas.height - 20) {
-            return true
-        }
-    }
-    return false;
 }
 
 function highScore() {
@@ -137,10 +138,25 @@ function highScore() {
     document.getElementById('user-start').style.display = 'none'
     document.getElementById('game-over').style.display = 'none'
     document.getElementById('high-score').style.display = 'block'
+    for (let i = 0; i < localStorage.length; i+=1) {
+        // console.log(localStorage.length)
+        // console.log(localStorage.getItem(localStorage.key(i+1)))
+        const node = document.createElement("div");
+        const textNode = document.createTextNode(localStorage.getItem(localStorage.key(i )));
+        node.appendChild(textNode);
+        document.getElementById("score-user").appendChild(node);
+    }
 }
 
 function btnBack() {
-    gameStart()
+    gameBack()
+}
+
+function gameBack() {
+    document.getElementById('modal').style.display = 'block'
+    document.getElementById('user-start').style.display = 'none'
+    document.getElementById('game-over').style.display = 'block'
+    document.getElementById('high-score').style.display = 'none'
 }
 
 window.addEventListener("keydown", ((event) => {
