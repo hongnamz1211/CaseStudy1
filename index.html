@@ -4,12 +4,76 @@
     <meta charset="UTF-8">
     <title>Snake Game</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="">
 </head>
 <body>
 <h1>Snake.io 2021</h1>
 <canvas id="myCanvas" width="600" height="400"></canvas>
-<!--<button id="start">Start</button>-->
 
+<audio id="music">
+    <source src="sound/music.mp3" type="audio/mpeg">
+</audio>
+<audio id="sound-eat-food">
+    <source src="sound/eat.mp3" type="audio/mpeg">
+</audio>
+<audio id="sound-game-over">
+    <source src="sound/gameover.mp3" type="audio/mpeg">
+</audio>
+
+<div class="modal" id="modal">
+    <div class="modal-overlay">
+    </div>
+    <div class="modal-body">
+        <!--GAME START-->
+        <div class="btn-game-start" id="game-start">
+            <button id="img-start" class="btn-start" onclick="btnStart()">
+                <img src="image/start.png" height="101" width="100"/>
+            </button>
+        </div>
+
+
+        <div>
+            <label for="user-start">
+                <input id="user-start" type="text" placeholder="Nhập user name"
+                       onchange="inputUser()">
+            </label>
+        </div>
+
+        <!--GAME OVER -->
+        <div class="btn-game-over" id="game-over">
+            <div>
+                <h2 class="game-over">GAME OVER</h2>
+            </div>
+            <div>
+                <h3 id="score" class="score">Score: </h3>
+            </div>
+
+            <div class="btn-game">
+                <button id="btn-play-again" class="btn-play-again" onclick="gamePlayAgain()">PLAY AGAIN</button>
+                <button id="btn-high-score" class="btn-high-score" onclick="highScore()">HIGH SCORE</button>
+            </div>
+        </div>
+
+        <!--HIGH SCORE-->
+        <div class="high-score" id="high-score">
+            <div class="tab-high-score">
+                <p id="tab"><b>High Score</b></p>
+            </div>
+            <div>
+                <button id="btn-back" class="btn-back" onclick="btnBack()">BACK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.addEventListener('click', playMusic);
+
+    function playMusic() {
+        document.getElementById('music').play();
+        window.removeEventListener('click', playMusic);
+    }
+</script>
 </body>
 <script src="snake.js"></script>
 <script src="food.js"></script>

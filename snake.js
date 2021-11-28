@@ -8,6 +8,15 @@ class Snake {
         this.tail = [];
         this.length = 3;
     }
+    setXY(x,y) {
+        this.x = x;
+        this.y = y;
+        this.grid = 20;
+        this.xDirection = this.grid;
+        this.yDirection = 0;
+        this.tail = [];
+        this.length = 3;
+    }
 
     getRandomColor() {
         return Math.floor(Math.random() * 255)
@@ -48,14 +57,16 @@ class Snake {
             myFood.resetFood();
             this.length++;
             score++;
+            soundEatFood.play()
         }
     }
 
     drawSnake() {
         ctx.fillStyle = "#fff";
         ctx.strokeStyle = "red";
+        // ctx.fillRect(this.x, this.y,this.grid - 2, this.grid - 2)
         ctx.fillRect(this.tail[0].x, this.tail[0].y, this.grid - 2, this.grid - 2)
-        // ctx.strokeRect(this.tail[0].x, this.tail[0].y, this.grid - 2, this.grid - 2)
+        ctx.strokeRect(this.tail[0].x, this.tail[0].y, this.grid - 2, this.grid - 2)
         ctx.fillStyle = "red"
         ctx.fillRect(this.tail[0].x + 3, this.tail[0].y + 3, this.grid -8, this.grid - 8)
         ctx.fillStyle = "blue"
@@ -71,7 +82,6 @@ class Snake {
             // ctx.fillStyle = "yellow"
             ctx.fillStyle = "rgb("+ red + "," + blue + "," + green + ")"
             ctx.fillRect(this.tail[i].x, this.tail[i].y, this.grid-2, this.grid -2)
-            // ctx.fillStyle = "rgb("+ red + "," + blue + "," + green + ")"
             ctx.fillStyle = "yellow"
             ctx.fillRect(this.tail[0].x, this.tail[0].y + 6, this.grid - 2, this.grid - 14)
         }
