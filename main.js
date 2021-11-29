@@ -10,7 +10,6 @@ let mySnake = new Snake(-20, 320);
 let myFood = new Food(120, 120);
 
 function showModalUserName() {
-    // document.getElementById('modal').style.display = 'block'
     document.getElementById('game-start').style.display = 'block'
     document.getElementById('game-over').style.display = 'none'
     document.getElementById('high-score').style.display = 'none'
@@ -50,7 +49,7 @@ function gameStart() {
         document.getElementById('game-over').style.display = 'block'
         document.getElementById('high-score').style.display = 'none'
         soundGameOver.play()
-        localStorage.setItem("Score" + (localStorage.length), userName + " -------- " + score)
+        localStorage.setItem("Score" + (localStorage.length), userName + " : " + score)
         return
     }
     clearCanvas();
@@ -93,9 +92,6 @@ function gamePlayAgain() {
     mySnake.autoMove(gameOver());
     myFood.styleFood();
     mySnake.drawSnake();
-    // mySnake.drawSnake()
-    // mySnake.drawTail()
-    // mySnake = new Snake(-20, 320)
     document.getElementById('modal').style.display = 'none'
     document.getElementById('game-over').style.display = 'none'
     setTimeout(gameStart, 1000 / speedGame);
@@ -147,6 +143,7 @@ function highScore() {
         localStorage.removeItem("Score0")
         localStorage.removeItem("Score1")
         localStorage.removeItem("Score2")
+        localStorage.removeItem("Score3")
     }
 }
 
