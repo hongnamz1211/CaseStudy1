@@ -1,7 +1,7 @@
 let canvas = document.getElementById("myCanvas");
 let ctx = canvas.getContext("2d");
 
-let speedGame = 10;
+let speedGame = 12;
 let score = 0;
 let soundEatFood = document.getElementById('sound-eat-food')
 let soundGameOver = document.getElementById('sound-game-over')
@@ -121,13 +121,13 @@ function drawScore() {
     ctx.font = "12px Arial";
     ctx.fillText("Score: " + score, canvas.width - 70, 20);
     if (score > 5) {
-        return speedGame = 12;
+        return speedGame = 15;
     }
     if (score > 10) {
-        return speedGame = 16;
+        return speedGame = 20;
     }
     if (score > 15) {
-        return speedGame = 20;
+        return speedGame = 25;
     }
 }
 
