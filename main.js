@@ -17,6 +17,17 @@ function showModalUserName() {
     gamePause()
 }
 
+function gamePause() {
+    clearCanvas();
+    drawScore();
+    inputUser();
+    mySnake.drawTail();
+    mySnake.eatFood();
+    mySnake.autoMove(gameOver());
+    myFood.styleFood();
+    mySnake.drawSnake();
+}
+
 function btnStart() {
     hideModalUserName()
 }
@@ -29,18 +40,8 @@ function hideModalUserName() {
     gameStart()
 }
 
-function gamePause() {
-    clearCanvas();
-    drawScore();
-    inputUser();
-    mySnake.drawTail();
-    mySnake.eatFood();
-    mySnake.autoMove(gameOver());
-    myFood.styleFood();
-    mySnake.drawSnake();
-}
-
 let status
+
 function gameStart() {
     status = gameOver()
     if (status) {
@@ -49,8 +50,7 @@ function gameStart() {
         document.getElementById('game-over').style.display = 'block'
         document.getElementById('high-score').style.display = 'none'
         soundGameOver.play()
-
-        localStorage.setItem("Score" + (localStorage.length),(localStorage.length + 1) + " - " + userName+ " : " +score)
+        localStorage.setItem("Score" + (localStorage.length), userName + " -------- " + score)
         return
     }
     clearCanvas();
@@ -61,24 +61,6 @@ function gameStart() {
     mySnake.autoMove(gameOver());
     myFood.styleFood();
     mySnake.drawSnake();
-    setTimeout(gameStart, 1000 / speedGame);
-}
-
-function gamePlayAgain() {
-    mySnake.setXY(-20, 320)
-    clearCanvas();
-    drawScore(score = 0);
-    inputUser();
-    mySnake.drawTail();
-    mySnake.eatFood();
-    mySnake.autoMove(gameOver());
-    myFood.styleFood();
-    mySnake.drawSnake();
-    // mySnake.drawSnake()
-    // mySnake.drawTail()
-    // mySnake = new Snake(-20, 320)
-    document.getElementById('modal').style.display = 'none'
-    document.getElementById('game-over').style.display = 'none'
     setTimeout(gameStart, 1000 / speedGame);
 }
 
@@ -101,6 +83,23 @@ function gameOver() {
     return false;
 }
 
+function gamePlayAgain() {
+    mySnake.setXY(-20, 320)
+    clearCanvas();
+    drawScore(score = 0);
+    inputUser();
+    mySnake.drawTail();
+    mySnake.eatFood();
+    mySnake.autoMove(gameOver());
+    myFood.styleFood();
+    mySnake.drawSnake();
+    // mySnake.drawSnake()
+    // mySnake.drawTail()
+    // mySnake = new Snake(-20, 320)
+    document.getElementById('modal').style.display = 'none'
+    document.getElementById('game-over').style.display = 'none'
+    setTimeout(gameStart, 1000 / speedGame);
+}
 
 function clearCanvas() {
     // Bao khung border
@@ -113,7 +112,7 @@ function inputUser() {
     userName = document.getElementById('user-start').value;
     ctx.fillStyle = "yellow";
     ctx.font = "12px Arial";
-    ctx.fillText("User: " + userName, 20, 20);
+    ctx.fillText("User: " + userName, 30, 20);
 }
 
 function drawScore() {
@@ -138,13 +137,16 @@ function highScore() {
     document.getElementById('user-start').style.display = 'none'
     document.getElementById('game-over').style.display = 'none'
     document.getElementById('high-score').style.display = 'block'
-    for (let i = 0; i < localStorage.length; i+=1) {
+    for (let i = 0; i < localStorage.length; i += 1) {
         // console.log(localStorage.length)
         // console.log(localStorage.getItem(localStorage.key(i+1)))
         const node = document.createElement("div");
-        const textNode = document.createTextNode(localStorage.getItem(localStorage.key(i )));
+        const textNode = document.createTextNode(localStorage.getItem(localStorage.key(i)));
         node.appendChild(textNode);
         document.getElementById("score-user").appendChild(node);
+        localStorage.removeItem("Score0")
+        localStorage.removeItem("Score1")
+        localStorage.removeItem("Score2")
     }
 }
 
@@ -165,4 +167,5 @@ window.addEventListener("keydown", ((event) => {
         }
     )
 )
+
 showModalUserName()

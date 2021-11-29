@@ -1,15 +1,14 @@
-
 class Food {
     x
     y
     grid
     row
     column
+
     constructor(x, y) {
         this.x = x;
         this.y = y;
         this.grid = 20;
-        // this.grids = 40
         this.row = canvas.width / this.grid;
         this.column = canvas.height / this.grid;
     }

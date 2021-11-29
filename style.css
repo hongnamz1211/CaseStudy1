@@ -111,9 +111,10 @@ canvas {
     margin-bottom: 10px;
     /*position: relative;*/
 }
- h2 {
-     margin-top: 250px;
- }
+
+h2 {
+    margin-top: 250px;
+}
 
 .score {
     margin-left: 135px;
@@ -145,12 +146,16 @@ p {
 
 
 .tab-high-score {
-    margin-left: 150px;
+    margin-left: 100px;
     color: #260206;
 }
 
-.high-score{
+.high-score {
     height: 250px;
+}
+
+#score-user {
+    padding-left: 50px;
 }
 
 .tab-high-score {
@@ -159,7 +164,7 @@ p {
     color: #260206;
 }
 
-.tab-content{
+.tab-content {
     height: 20%;
 }
 

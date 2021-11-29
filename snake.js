@@ -8,7 +8,8 @@ class Snake {
         this.tail = [];
         this.length = 3;
     }
-    setXY(x,y) {
+
+    setXY(x, y) {
         this.x = x;
         this.y = y;
         this.grid = 20;
@@ -68,9 +69,9 @@ class Snake {
         ctx.fillRect(this.tail[0].x, this.tail[0].y, this.grid - 2, this.grid - 2)
         ctx.strokeRect(this.tail[0].x, this.tail[0].y, this.grid - 2, this.grid - 2)
         ctx.fillStyle = "red"
-        ctx.fillRect(this.tail[0].x + 3, this.tail[0].y + 3, this.grid -8, this.grid - 8)
+        ctx.fillRect(this.tail[0].x + 3, this.tail[0].y + 3, this.grid - 8, this.grid - 8)
         ctx.fillStyle = "blue"
-        ctx.fillRect(this.tail[0].x + 6, this.tail[0].y + 6, this.grid -14, this.grid - 14)
+        ctx.fillRect(this.tail[0].x + 6, this.tail[0].y + 6, this.grid - 14, this.grid - 14)
 
     }
 
@@ -80,8 +81,8 @@ class Snake {
             let green = this.getRandomColor();
             let blue = this.getRandomColor();
             // ctx.fillStyle = "yellow"
-            ctx.fillStyle = "rgb("+ red + "," + blue + "," + green + ")"
-            ctx.fillRect(this.tail[i].x, this.tail[i].y, this.grid-2, this.grid -2)
+            ctx.fillStyle = "rgb(" + red + "," + blue + "," + green + ")"
+            ctx.fillRect(this.tail[i].x, this.tail[i].y, this.grid - 2, this.grid - 2)
             ctx.fillStyle = "yellow"
             ctx.fillRect(this.tail[0].x, this.tail[0].y + 6, this.grid - 2, this.grid - 14)
         }

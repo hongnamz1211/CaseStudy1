@@ -4,37 +4,37 @@
     <meta charset="UTF-8">
     <title>Snake.io 2022</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="">
 </head>
 <body>
 <h1>Snake.io 2022</h1>
 <canvas id="myCanvas" width="600" height="400"></canvas>
 
-<audio id="music">
-<!--    <source src="sound/music.mp3" type="audio/mpeg">-->
+<!--Sound-->
+<audio id="music" loop>
+    <source src="sound/music.mp3" type="audio/mpeg">
 </audio>
 <audio id="sound-eat-food">
-<!--    <source src="sound/eat.mp3" type="audio/mpeg">-->
+    <source src="sound/eat.mp3" type="audio/mpeg">
 </audio>
 <audio id="sound-game-over">
-<!--    <source src="sound/gameover.mp3" type="audio/mpeg">-->
+    <source src="sound/gameover.mp3" type="audio/mpeg">
 </audio>
 
+<!--Modal-->
 <div class="modal" id="modal">
     <div class="modal-overlay">
     </div>
     <div class="modal-body">
+
         <!--GAME START-->
         <div class="btn-game-start" id="game-start">
             <button id="img-start" class="btn-start" onclick="btnStart()">
                 <img src="image/start.png" height="101" width="100"/>
             </button>
         </div>
-
-
         <div>
             <label for="user-start">
-                <input id="user-start" type="text" placeholder="Nhập user name"  required
+                <input id="user-start" type="text" placeholder="Nhập user name" required
                        onchange="inputUser()">
             </label>
         </div>
@@ -50,7 +50,7 @@
 
             <div class="btn-game">
                 <button id="btn-play-again" class="btn-play-again" onclick="gamePlayAgain()">PLAY AGAIN</button>
-                <button id="btn-high-score" class="btn-high-score" onclick="highScore()">HISTORY</button>
+                <button id="btn-high-score" class="btn-high-score" onclick="highScore()">SAVE SCORE</button>
             </div>
         </div>
 
@@ -69,6 +69,7 @@
 
 <script>
     window.addEventListener('click', playMusic);
+
     function playMusic() {
         document.getElementById('music').play();
         window.removeEventListener('click', playMusic);
@@ -83,7 +84,7 @@
     }
     setTimeout(() => {
         snake.style.width = '-10px'
-    },1000)
+    }, 1000)
 </script>
 </body>
 <script src="snake.js"></script>
